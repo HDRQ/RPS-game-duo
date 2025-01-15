@@ -2,14 +2,18 @@
   "name": "rps-duo",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "dependencies": {
     "cra-template": "1.2.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^4.2.4"
   },
   "scripts": {
+    "postinstall": "pnpm install",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
