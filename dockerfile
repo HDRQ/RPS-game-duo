@@ -1,22 +1,26 @@
-# Use a Node.js base image
+# Use Node.js as the base image
 FROM node:16
 
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and install dependencies
-COPY package*.json ./
-RUN npm install
+# Install pnpm globally
+RUN npm install -g pnpm
 
-# Copy the rest of the app
+# Copy package.json and package-lock.json (or pnpm-lock.yaml if using pnpm)
+COPY pnpm-lock.yaml
+
+# Install dependencies using pnpm
+RUN pnpm install
+
+# Copy the rest of the application files
 COPY . .
 
-# Build the app
-RUN npm run build
+# Build the application (optional, for React projects)
+RUN pnpm run build
 
-# Serve the app
-RUN npm install -g serve
-CMD ["serve", "-s", "build"]
+# Set the command to start the application
+CMD ["pnpm", "start"]
 
-# Expose the port (default: 3000)
+# Expose the default port (optional for React)
 EXPOSE 3000
