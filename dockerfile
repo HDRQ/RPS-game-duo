@@ -7,20 +7,20 @@ WORKDIR /app
 # Install pnpm globally
 RUN npm install -g pnpm
 
-# Copy package.json and package-lock.json (or pnpm-lock.yaml if using pnpm)
-COPY pnpm-lock.yaml
+# Copy package.json and pnpm-lock.yaml to the working directory
+COPY package.json pnpm-lock.yaml ./
 
 # Install dependencies using pnpm
 RUN pnpm install
 
-# Copy the rest of the application files
+# Copy the rest of the application files to the working directory
 COPY . .
 
-# Build the application (optional, for React projects)
+# Build the application (optional, for React or similar)
 RUN pnpm run build
 
-# Set the command to start the application
+# Set the default command to start the application
 CMD ["pnpm", "start"]
 
-# Expose the default port (optional for React)
+# Expose the port (optional, for React or any app exposing a port)
 EXPOSE 3000
